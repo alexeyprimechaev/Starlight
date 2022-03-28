@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		801D731F27F23C23002FC1C3 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801D731E27F23C23002FC1C3 /* TimelineCell.swift */; };
 		803726BB27EFC1580042EA74 /* StarlightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803726BA27EFC1580042EA74 /* StarlightApp.swift */; };
 		803726BD27EFC1580042EA74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803726BC27EFC1580042EA74 /* ContentView.swift */; };
 		803726BF27EFC1590042EA74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803726BE27EFC1590042EA74 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		801D731E27F23C23002FC1C3 /* TimelineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
 		803726B727EFC1580042EA74 /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803726BA27EFC1580042EA74 /* StarlightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlightApp.swift; sourceTree = "<group>"; };
 		803726BC27EFC1580042EA74 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				803726BA27EFC1580042EA74 /* StarlightApp.swift */,
+				801D731E27F23C23002FC1C3 /* TimelineCell.swift */,
 				803726BC27EFC1580042EA74 /* ContentView.swift */,
 				803726E727EFDA4B0042EA74 /* UnifiedTabBar.swift */,
 				803726BE27EFC1590042EA74 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				803726BD27EFC1580042EA74 /* ContentView.swift in Sources */,
+				801D731F27F23C23002FC1C3 /* TimelineCell.swift in Sources */,
 				803726BB27EFC1580042EA74 /* StarlightApp.swift in Sources */,
 				803726E827EFDA4B0042EA74 /* UnifiedTabBar.swift in Sources */,
 			);
