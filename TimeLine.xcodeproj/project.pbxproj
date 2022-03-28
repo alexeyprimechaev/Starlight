@@ -11,14 +11,16 @@
 		803726BD27EFC1580042EA74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803726BC27EFC1580042EA74 /* ContentView.swift */; };
 		803726BF27EFC1590042EA74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803726BE27EFC1590042EA74 /* Assets.xcassets */; };
 		803726C227EFC1590042EA74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803726C127EFC1590042EA74 /* Preview Assets.xcassets */; };
+		803726E827EFDA4B0042EA74 /* UnifiedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803726E727EFDA4B0042EA74 /* UnifiedTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		803726B727EFC1580042EA74 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		803726B727EFC1580042EA74 /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803726BA27EFC1580042EA74 /* StarlightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlightApp.swift; sourceTree = "<group>"; };
 		803726BC27EFC1580042EA74 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		803726BE27EFC1590042EA74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		803726C127EFC1590042EA74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		803726E727EFDA4B0042EA74 /* UnifiedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +45,7 @@
 		803726B827EFC1580042EA74 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				803726B727EFC1580042EA74 /* Starlight.app */,
+				803726B727EFC1580042EA74 /* TimeLine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +55,7 @@
 			children = (
 				803726BA27EFC1580042EA74 /* StarlightApp.swift */,
 				803726BC27EFC1580042EA74 /* ContentView.swift */,
+				803726E727EFDA4B0042EA74 /* UnifiedTabBar.swift */,
 				803726BE27EFC1590042EA74 /* Assets.xcassets */,
 				803726C027EFC1590042EA74 /* Preview Content */,
 			);
@@ -70,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		803726B627EFC1580042EA74 /* Starlight */ = {
+		803726B627EFC1580042EA74 /* TimeLine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 803726C527EFC1590042EA74 /* Build configuration list for PBXNativeTarget "Starlight" */;
+			buildConfigurationList = 803726C527EFC1590042EA74 /* Build configuration list for PBXNativeTarget "TimeLine" */;
 			buildPhases = (
 				803726B327EFC1580042EA74 /* Sources */,
 				803726B427EFC1580042EA74 /* Frameworks */,
@@ -82,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = Starlight;
+			name = TimeLine;
 			productName = Starlight;
-			productReference = 803726B727EFC1580042EA74 /* Starlight.app */;
+			productReference = 803726B727EFC1580042EA74 /* TimeLine.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 803726B227EFC1580042EA74 /* Build configuration list for PBXProject "Starlight" */;
+			buildConfigurationList = 803726B227EFC1580042EA74 /* Build configuration list for PBXProject "TimeLine" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				803726B627EFC1580042EA74 /* Starlight */,
+				803726B627EFC1580042EA74 /* TimeLine */,
 			);
 		};
 /* End PBXProject section */
@@ -139,6 +142,7 @@
 			files = (
 				803726BD27EFC1580042EA74 /* ContentView.swift in Sources */,
 				803726BB27EFC1580042EA74 /* StarlightApp.swift in Sources */,
+				803726E827EFDA4B0042EA74 /* UnifiedTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,13 +281,14 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lekskeks.Starlight;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lekskeks.TimeLine;
+				PRODUCT_NAME = TimeLine;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,13 +311,14 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lekskeks.Starlight;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lekskeks.TimeLine;
+				PRODUCT_NAME = TimeLine;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -322,7 +328,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		803726B227EFC1580042EA74 /* Build configuration list for PBXProject "Starlight" */ = {
+		803726B227EFC1580042EA74 /* Build configuration list for PBXProject "TimeLine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				803726C327EFC1590042EA74 /* Debug */,
@@ -331,7 +337,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		803726C527EFC1590042EA74 /* Build configuration list for PBXNativeTarget "Starlight" */ = {
+		803726C527EFC1590042EA74 /* Build configuration list for PBXNativeTarget "TimeLine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				803726C627EFC1590042EA74 /* Debug */,
