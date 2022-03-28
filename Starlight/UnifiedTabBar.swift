@@ -16,7 +16,7 @@ struct UnifiedTabBar: View {
     @State var selectedTab = 0
     
     @State var isSearching = false
-
+    
     
     var tabs = ["My Sequences", "Discover"]
     
@@ -26,27 +26,27 @@ struct UnifiedTabBar: View {
             
             
             if !isSearching {
-            if selectedTab == 0 {
-                Button {
-
-                } label: {
-                    Image(systemName: "plus").imageScale(.large)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                       
+                if selectedTab == 0 {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus").imageScale(.large)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                        
+                    }
+                    
+                    
                 }
-                
-                
-            }
             }
             
             UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, tag: 0, title: "Library", icon: "tray.fill")
-                
+            
             UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, tag: 1, title: "Discover", icon: "square.grid.3x3.square")
             UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, tag: 2, title: "Profile", icon: "person.fill")
             
             
-
+            
             
         }.padding(12).padding(.trailing, !isSearching ? 12 : 0).padding(.leading, isSearching || selectedTab > 0 ? 12 : 0)
     }
@@ -62,9 +62,9 @@ struct UnifiedTabItem: View {
     
     @Binding var isSearching: Bool
     @State var searchText = ""
-
+    
     @FocusState var isFocused: Bool
-
+    
     var tag: Int
     
     var title: String
@@ -75,63 +75,79 @@ struct UnifiedTabItem: View {
         
         
         HStack(spacing:12) {
-        if !(isSearching && tag != selectedTab) {
-            
-        
-        Button {
-            if selectedTab == tag {
-                withAnimation {
-                isSearching = true
-                isFocused = true
-                }
-            } else {
-                withAnimation(.default) {
-                    selectedTab = tag
-                }
-            }
-        } label: {
-            HStack(spacing: 0) {
-            if selectedTab == tag {
-                Spacer()
-            }
-            Label {
-                if selectedTab == tag {
-                    ZStack {
-                        Text(title)
-                            .id(tag)
-                            .lineLimit(1)
-                            .transition(.opacity.combined(with: .move(edge: tag == 0 ? .leading : .trailing)))
-                        
-                        TextField("Search \(title)", text: $searchText).focused($isFocused).opacity(isSearching ? 1 : 0)
-                        if searchText.count > 0 {
-                            Button {
-                                searchText = ""
-                            } label: {
-                                Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary)
-                            }.animation(.default, value: searchText.count > 0).transition(.opacity)
-                        }
-                        
-                    }
-
-                        
-                    
-                    
-                }
-            } icon: {
-                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary).id(tag)
-
-            }
-                .font(.headline)
-                .foregroundColor(.primary)
-                .imageScale(.medium)
-                .padding(12)
+            if !(isSearching && tag != selectedTab) {
                 
-            if selectedTab == tag {
-                Spacer()
+                
+                Button {
+                    if selectedTab == tag {
+                        withAnimation {
+                            isSearching = true
+                            isFocused = true
+                        }
+                    } else {
+                        withAnimation(.default) {
+                            selectedTab = tag
+                        }
+                    }
+                } label: {
+                    ZStack {
+                        HStack(spacing: 0) {
+                            if selectedTab == tag {
+                                Spacer()
+                            }
+                            Label {
+                                if selectedTab == tag {
+                                    Text(isSearching ? "Search \(title)" : title)
+                                        .opacity(searchText.count == 0 ? 1 : 0)
+                                        .lineLimit(1)
+                                        .foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
+                                        .transition(.opacity.combined(with: .move(edge: tag == 0 ? .leading : .trailing)))
+                                }
+                                if isSearching {
+                                    Spacer()
+                                }
+                                
+                            } icon: {
+                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
+                                
+                            }
+                            
+                            
+                            if selectedTab == tag {
+                                Spacer()
+                            }
+                        }
+                        if selectedTab == tag {
+                        HStack(spacing: 0) {
+                            if selectedTab == tag {
+                                Spacer()
+                            }
+                            Label {
+                                TextField("", text: $searchText).focused($isFocused).opacity(isSearching ? 1 : 0)
+                                if searchText.count > 0 {
+                                    Button {
+                                        searchText = ""
+                                    } label: {
+                                        Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary)
+                                    }.animation(.default, value: searchText.count > 0).transition(.opacity)
+                                }
+                            } icon: {
+                                
+                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary).opacity(0)
+                            }
+                            if selectedTab == tag {
+                                Spacer()
+                            }
+                        }.disabled(isSearching ? false : true)
+                        }
+                    }
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .imageScale(.medium)
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 12, style: .continuous)).clipped()
+                }.tint(.appBackground2).opacity(selectedTab == tag ? 1 : 0.5)
             }
-            }.background(RoundedRectangle(cornerRadius: 12, style: .continuous)).clipped()
-        }.tint(.appBackground2).opacity(selectedTab == tag ? 1 : 0.5)
-        }
             if isSearching && tag == selectedTab {
                 Button {
                     isFocused = false
@@ -148,11 +164,12 @@ struct UnifiedTabItem: View {
                         .padding(.vertical, 9)
                 }.transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity), removal: .identity))
             }
-
-        }
             
+        }
+        
         
     }
+    
 }
 
 struct UnifiedTabBar_Previews: PreviewProvider {
