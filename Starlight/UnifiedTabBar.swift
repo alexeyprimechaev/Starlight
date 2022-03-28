@@ -62,7 +62,7 @@ struct UnifiedTabItem: View {
     
     @FocusState private var isFocused: Bool
     
-    @ScaledMetric(relativeTo: .headline) private var height = 20
+    @ScaledMetric(relativeTo: .headline) private var height = 22
     
     var tag: Int
     var title: String
@@ -119,7 +119,7 @@ struct UnifiedTabItem: View {
                                 isFocused = true
                             }
                         } else {
-                            withAnimation(.default) {
+                            withAnimation {
                                 selectedTab = tag
                             }
                         }

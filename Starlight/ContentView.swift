@@ -31,6 +31,12 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Menu {
+                            Button {
+                                
+                            } label: {
+                                Label("Select", systemImage: "checkmark.circle")
+                            }
+                            Divider()
                             Picker("Theme", selection: $context.isStarlight) {
                                 Label("Starlight", systemImage: "moon.stars").tag(true)
                                 Label("Silver", systemImage: "circle").tag(false)
@@ -46,7 +52,8 @@ struct ContentView: View {
                             VStack(alignment: .leading, spacing: 12) {
                                 ForEach(searchText == "" ? titles : titles.filter {$0.lowercased().contains(searchText.lowercased()) }, id: \.self) { title in
                                     
-                                    TimelineCell(title: titles[titles.firstIndex(of: title)!], icon: icons[titles.firstIndex(of: title)!], timers: timers[titles.firstIndex(of: title)!])
+                                    TimelineCell(title: titles[titles.firstIndex(of: title)!], icon: icons[titles.firstIndex(of: title)!], timers: timers[titles.firstIndex(of: title)!]) {
+                                    }
 
                                 }
     

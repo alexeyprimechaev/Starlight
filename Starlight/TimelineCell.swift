@@ -26,13 +26,15 @@ struct TimelineCell: View {
     
     @State var endWidth: CGFloat = 0
     
+    var deleteAction: () -> ()
+    
     var body: some View {
         
         
         ZStack(alignment: .trailing) {
             
             Button {
-                
+                deleteAction()
             } label: {
                 VStack {
                     Spacer()
@@ -40,10 +42,10 @@ struct TimelineCell: View {
                     Spacer()
                 }.frame(width: width).background(RoundedRectangle(cornerRadius: 20, style: .continuous).foregroundColor(.red)).opacity(opacity).clipped()
             }.buttonStyle(.navigation).zIndex(1)
-                    
-                
-                
-                
+            
+            
+            
+            
             
             
             
@@ -60,37 +62,38 @@ struct TimelineCell: View {
                     CellBackground(timers: timers)
                     Rectangle().foregroundColor(.clear).frame(width: width)
                 }).zIndex(0)
-                
             
-
+            
+            
             
         }
-        .animation(.interactiveSpring(), value: width)
         .gesture(
             DragGesture(minimumDistance: 1, coordinateSpace: .local)
                 .onChanged { gesture in
-                    width = -gesture.translation.width + endWidth
-                    opacity = -gesture.translation.width/maxWidth + endWidth
-                    print(gesture.translation.width+endWidth)
-                    opacity2 = (1+((gesture.translation.width+maxWidth - endWidth)/maxWidth*1))
+                    withAnimation(.interactiveSpring()) {
+                        width = -gesture.translation.width + endWidth
+                        opacity = -gesture.translation.width/maxWidth + endWidth
+                        print(gesture.translation.width+endWidth)
+                        opacity2 = (1+((gesture.translation.width+maxWidth - endWidth)/maxWidth*1))
+                    }
                     
                     
                 }
             
                 .onEnded { gesture in
-
+                    
                     if -gesture.translation.width > maxWidth - 24 {
-                        withAnimation {
+                        withAnimation(.spring()) {
                             width = maxWidth
                             opacity = 1
                             opacity2 = 1
                             endWidth = 77
                         }
                     } else {
-                        withAnimation {
-                        width = 0
-                        opacity = 0
-                        opacity2 = 1
+                        withAnimation(.spring()) {
+                            width = 0
+                            opacity = 0
+                            opacity2 = 1
                             endWidth = 0
                         }
                     }
@@ -101,8 +104,8 @@ struct TimelineCell: View {
         
         
     }
-        
-
+    
+    
 }
 
 
@@ -111,7 +114,7 @@ struct CellBackground: View {
     
     
     var timers: [CGFloat]
-
+    
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
