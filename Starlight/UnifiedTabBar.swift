@@ -32,7 +32,7 @@ struct UnifiedTabBar: View {
                         Button {
                             
                         } label: {
-                            
+                            Text("huh")
                         }
                     } label: {
                         Image(systemName: "plus").imageScale(.large)
@@ -170,7 +170,7 @@ struct UnifiedTabItem: View {
                     .background(RoundedRectangle(cornerRadius: 12, style: .continuous)).clipped()
                 }
                 
-                    .buttonStyle(NavigationButtonStyle())
+                    .buttonStyle(.navigation)
                     .foregroundColor(selectedTab == tag ? .appBackground3 : .appBackground2)
             }
             if isSearching && tag == selectedTab {
@@ -201,10 +201,16 @@ struct NavigationButtonStyle: ButtonStyle {
         
     func makeBody(configuration: Configuration) -> some View {
             configuration.label
-            .brightness(configuration.isPressed ? -0.05 : 0)
+            .opacity(configuration.isPressed ? 0.5 : 1)
     }
 }
 
-extension ButtonStyle {
-    //static let tab = NavigationButtonStyle()
+
+
+
+extension ButtonStyle where Self == NavigationButtonStyle {
+    
+    internal static var navigation: NavigationButtonStyle {
+        NavigationButtonStyle()
+    }
 }
