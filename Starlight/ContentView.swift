@@ -11,19 +11,65 @@ struct ContentView: View {
     
     @EnvironmentObject var context: ColorContext
     
-        
+    @State var selectedTab = 0
+    
+    @State var searchText = ""
+    
+    @State var sequences = ["One", "Two", "Three", "Four", "Five"]
+    
     var body: some View {
         ZStack {
             Color.appBackground.edgesIgnoringSafeArea(.all)
             
-            VStack {
-            Toggle("", isOn: $context.isStarlight).padding().background(Color.appBackground2).padding(24)
-                Spacer()
-                UnifiedTabBar()
+            VStack(alignment: .leading, spacing: 0) {
+                switch selectedTab {
+                case 0:
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text("Library").font(.largeTitle.bold()).padding(.top, 44)
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Sequences:")
+                                ForEach(searchText == "" ? sequences : sequences.filter {$0.lowercased().contains(searchText)}, id: \.self) { sequence in
+                                    Text(sequence)
+                                }
+                            }.padding(.top, 24)
+                            
+                            Spacer()
+                        }.padding(24)
+                        
+                    }.transition(.identity)
+                case 1:
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text("Discover").font(.largeTitle.bold()).padding(.top, 44)
+                            Spacer()
+                        }.padding(24)
+                        
+                    }.transition(.identity)
+                case 2:
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text("Profile").font(.largeTitle.bold()).padding(.top, 44)
+                            Toggle("Starlight", isOn: $context.isStarlight).toggleStyle(.switch).tint(.accentColor)
+
+                            Spacer()
+                        }.padding(24)
+                        
+                    }.transition(.identity)
+                    
+                    
+                default:
+                    Text("eror")
+                }
+                
+                
+                UnifiedTabBar(selectedTab: $selectedTab, searchText: $searchText) {
+                    sequences.append("New Sequence")
+                }
                 
             }
             
-
+            
         }
         
     }
@@ -66,8 +112,8 @@ class ColorContext: ObservableObject {
 
 
 public protocol EnvironmentKey {
-  associatedtype Value
-  static var defaultValue: Self.Value { get }
+    associatedtype Value
+    static var defaultValue: Self.Value { get }
 }
 
 
@@ -91,7 +137,7 @@ public protocol EnvironmentKey {
 //            .background(RoundedRectangle(cornerRadius: 12, style: .continuous))
 //        
 //    }
-//    
+//
 //    .buttonStyle(.plain)
 //    
 //}

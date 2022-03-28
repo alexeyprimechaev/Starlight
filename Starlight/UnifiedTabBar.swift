@@ -13,13 +13,14 @@ struct UnifiedTabBar: View {
     
     
     
-    @State var selectedTab = 0
+    @Binding var selectedTab: Int
+    @Binding var searchText: String
     
     @State var isSearching = false
     
+    var primaryAction: () -> ()
     
-    var tabs = ["My Sequences", "Discover"]
-    
+        
     var body: some View {
         
         HStack(spacing: isSearching ? 0 : 12) {
@@ -27,23 +28,29 @@ struct UnifiedTabBar: View {
             
             if !isSearching {
                 if selectedTab == 0 {
-                    Button {
-                        
+                    Menu {
+                        Button {
+                            
+                        } label: {
+                            
+                        }
                     } label: {
                         Image(systemName: "plus").imageScale(.large)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
                         
+                    } primaryAction: {
+                        primaryAction()
                     }
                     
                     
                 }
             }
             
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, tag: 0, title: "Library", icon: "tray.fill")
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 0, title: "Library", icon: "tray.fill")
             
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, tag: 1, title: "Discover", icon: "square.grid.3x3.square")
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, tag: 2, title: "Profile", icon: "person.fill")
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 1, title: "Discover", icon: "square.grid.3x3.square")
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 2, title: "Profile", icon: "person.fill")
             
             
             
@@ -62,7 +69,7 @@ struct UnifiedTabItem: View {
     @Binding var selectedTab: Int
     
     @Binding var isSearching: Bool
-    @State var searchText = ""
+    @Binding var searchText: String
     
     @FocusState var isFocused: Bool
     
@@ -171,7 +178,7 @@ struct UnifiedTabItem: View {
                         .font(.headline)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 9)
-                }.transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity), removal: .identity))
+                }.transition(.identity)
             }
             
         }
@@ -179,11 +186,5 @@ struct UnifiedTabItem: View {
         
     }
     
-}
-
-struct UnifiedTabBar_Previews: PreviewProvider {
-    static var previews: some View {
-        UnifiedTabBar()
-    }
 }
 
