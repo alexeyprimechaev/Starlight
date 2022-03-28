@@ -48,6 +48,7 @@ struct UnifiedTabBar: View {
             
             
             
+            
         }.padding(12).padding(.trailing, !isSearching ? 12 : 0).padding(.leading, isSearching || selectedTab > 0 ? 12 : 0)
     }
 }
@@ -95,20 +96,28 @@ struct UnifiedTabItem: View {
                             if selectedTab == tag {
                                 Spacer()
                             }
-                            Label {
+                            HStack(spacing: 0) {
+                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
+                                
+                                
                                 if selectedTab == tag {
+                                    Spacer().frame(width: 7)
                                     Text(isSearching ? "Search \(title)" : title)
                                         .opacity(searchText.count == 0 ? 1 : 0)
                                         .lineLimit(1)
                                         .foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
-                                        .transition(.opacity.combined(with: .move(edge: tag == 0 ? .leading : .trailing)))
+                                        .matchedGeometryEffect(id: tag, in: animation, properties: .position)
+                                    //.transition(.opacity.combined(with: .move(edge: tag == 0 ? .leading : .trailing)))
+                                } else {
+                                    Text("").frame(width: 0).matchedGeometryEffect(id: tag, in: animation, properties: .position)
                                 }
+                                
                                 if isSearching {
                                     Spacer()
                                 }
                                 
-                            } icon: {
-                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
+                                
+                                
                                 
                             }
                             
