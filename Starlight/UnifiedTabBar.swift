@@ -135,7 +135,7 @@ struct UnifiedTabItem: View {
                                 
                                 
                                 if selectedTab == tag {
-                                    Spacer().frame(width: 7)
+                                    Spacer().frame(width: 8)
                                     Text(isSearching ? "Search \(title)" : title)
                                         .opacity(searchText.count == 0 ? 1 : 0)
                                         .lineLimit(1)
@@ -226,7 +226,7 @@ struct UnifiedTabItem: View {
                             }.padding(.vertical, 6).padding(.horizontal, 6).buttonStyle(.borderless)
                             
                         }
-                    }.padding(.trailing, 6).zIndex(Double((tag*10)+1))
+                    }.padding(.leading, 6).zIndex(Double((tag*10)+1))
                 }
             }
         }
