@@ -99,6 +99,13 @@ extension Color {
             return Color(UIColor.secondarySystemBackground)
         }
     }
+    static var appBackground3: Color {
+        if context.isStarlight {
+            return Color("starlightP33")
+        } else {
+            return Color(UIColor.systemGray5)
+        }
+    }
 }
 
 

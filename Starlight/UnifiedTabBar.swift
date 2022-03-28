@@ -41,16 +41,16 @@ struct UnifiedTabBar: View {
                         
                     } primaryAction: {
                         primaryAction()
-                    }
+                    }.zIndex(0)
                     
                     
                 }
             }
             
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 0, title: "Library", icon: "tray.fill")
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 0, title: "Library", icon: "tray.fill").zIndex(1)
             
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 1, title: "Discover", icon: "square.grid.3x3.square")
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 2, title: "Profile", icon: "person.fill")
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 1, title: "Discover", icon: "square.grid.3x3.square").zIndex(2)
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 2, title: "Profile", icon: "person.fill").zIndex(3)
             
             
             
@@ -73,6 +73,8 @@ struct UnifiedTabItem: View {
     
     @FocusState var isFocused: Bool
     
+    @ScaledMetric(relativeTo: .headline) var height = 20
+    
     var tag: Int
     
     var title: String
@@ -87,6 +89,9 @@ struct UnifiedTabItem: View {
                 
                 
                 Button {
+                    if isSearching {
+                    
+                    } else {
                     if selectedTab == tag {
                         withAnimation {
                             isSearching = true
@@ -97,6 +102,7 @@ struct UnifiedTabItem: View {
                             selectedTab = tag
                         }
                     }
+                    }
                 } label: {
                     ZStack {
                         HStack(spacing: 0) {
@@ -104,7 +110,7 @@ struct UnifiedTabItem: View {
                                 Spacer()
                             }
                             HStack(spacing: 0) {
-                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
+                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary).frame(width: height, height: height, alignment: .center)
                                 
                                 
                                 if selectedTab == tag {
@@ -112,7 +118,7 @@ struct UnifiedTabItem: View {
                                     Text(isSearching ? "Search \(title)" : title)
                                         .opacity(searchText.count == 0 ? 1 : 0)
                                         .lineLimit(1)
-                                        .foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary)
+                                        
                                         .matchedGeometryEffect(id: tag, in: animation, properties: .position)
                                     //.transition(.opacity.combined(with: .move(edge: tag == 0 ? .leading : .trailing)))
                                 } else {
@@ -126,13 +132,13 @@ struct UnifiedTabItem: View {
                                 
                                 
                                 
-                            }
+                            }.disabled(isSearching ? true : false)
                             
                             
                             if selectedTab == tag {
                                 Spacer()
                             }
-                        }
+                        }.foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary).opacity(tag == selectedTab ? 1 : 0.667)
                         if selectedTab == tag {
                         HStack(spacing: 0) {
                             if selectedTab == tag {
@@ -149,7 +155,7 @@ struct UnifiedTabItem: View {
                                 }
                             } icon: {
                                 
-                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary).opacity(0)
+                                Image(systemName: isSearching && tag == selectedTab ? "magnifyingglass" : icon).foregroundColor(isSearching && tag == selectedTab ? Color(UIColor.placeholderText) : .primary).frame(width: height, height: height, alignment: .center).opacity(0)
                             }
                             if selectedTab == tag {
                                 Spacer()
@@ -158,11 +164,14 @@ struct UnifiedTabItem: View {
                         }
                     }
                     .font(.headline)
-                    .foregroundColor(.primary)
+                    .foregroundColor(selectedTab == tag ? .primary : .secondary)
                     .imageScale(.medium)
                     .padding(12)
                     .background(RoundedRectangle(cornerRadius: 12, style: .continuous)).clipped()
-                }.tint(.appBackground2).opacity(selectedTab == tag ? 1 : 0.5)
+                }
+                
+                    .buttonStyle(NavigationButtonStyle())
+                    .foregroundColor(selectedTab == tag ? .appBackground3 : .appBackground2)
             }
             if isSearching && tag == selectedTab {
                 Button {
@@ -174,11 +183,11 @@ struct UnifiedTabItem: View {
                     
                     
                 } label: {
-                    Text("Done").imageScale(.large)
-                        .font(.headline)
+                    Text("Cancel").imageScale(.large)
+                        .font(.body)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 9)
-                }.transition(.identity)
+                }.animation(.default, value: isSearching).transition(.asymmetric(insertion: .opacity, removal: .identity))
             }
             
         }
@@ -188,3 +197,14 @@ struct UnifiedTabItem: View {
     
 }
 
+struct NavigationButtonStyle: ButtonStyle {
+        
+    func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+            .brightness(configuration.isPressed ? -0.05 : 0)
+    }
+}
+
+extension ButtonStyle {
+    //static let tab = NavigationButtonStyle()
+}
