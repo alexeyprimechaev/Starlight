@@ -35,16 +35,14 @@ struct UnifiedTabBar: View {
     
     var primaryAction: () -> ()
     
-    var actions1 = [Action(title: "Huh", icon: "plus", action: {})]
-    var actions2 = [Action(title: "Meow", icon: "heart", action: {})]
+    var actions1 = [Action(title: "Add New", icon: "plus", action: {})]
+    var actions2 = [Action(title: "Favorites", icon: "heart", action: {})]
     
     var body: some View {
         
         HStack(spacing: 0) {
             UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 0, title: "Library", icon: "tray.fill", actions: actions1)
-            
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 1, title: "Discover", icon: "square.grid.3x3.square")
-            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 2, title: "Profile", icon: "person.fill", actionPlacement: .trailing, actions: actions2)
+            UnifiedTabItem(selectedTab: $selectedTab, isSearching: $isSearching, searchText: $searchText, tag: 1, title: "Discover", icon: "square.grid.3x3.square", actionPlacement: .trailing, actions: actions2)
         }.padding(.horizontal, 18)
     }
 }
